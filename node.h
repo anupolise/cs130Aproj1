@@ -14,7 +14,8 @@ class node
 		node();
 		node(string str);
 		node(string str, node* ptrL, node* ptrR);
-
+    
+        ~node();
 
 		void setLeft(node *ptr);
 		void setRight(node *ptr);
