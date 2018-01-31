@@ -2,32 +2,38 @@
 #include "node.h"
 using namespace std;
 
-	node::node()
-	{
-		value=0;
-		left=NULL;
-		right=NULL;
-		
-	}
+node::node()
+{
+    data="";
+    counter = 0;
+    left=NULL;
+    right=NULL;
+    
+}
 
-	node::node(int val)
-	{
-		value=val;
-		left=NULL;
-		right=NULL;
-		
-	}
+node::node(string str)
+{
+    data = str;
+    counter = 1;
+    left=NULL;
+    right=NULL;
+    
+}
 
-	node::node(int val, node* ptrL, node* ptrR)
-	{
-		value=val;
-		left=ptrL;
-		right=ptrR;
-	}
+node::node(string str, node* ptrL, node* ptrR)
+{
+    data = str;
+    counter = 1;
+    left=ptrL;
+    right=ptrR;
+}
 	
-		void node::setLeft(node *ptr){left=ptr;}
-		void node::setRight(node *ptr){ right=ptr;}
-		void node::setValue(int val){ value=val;}
-		int node::getValue(){ return value;}
-		node* node::getLeft(){ return left;}
-		node* node::getRight(){ return right;}
+void node::setLeft(node *ptr){left=ptr;}
+void node::setRight(node *ptr){ right=ptr;}
+void node::setData(string str){ data=str;}
+string node::getData(){ return data;}
+node* node::getLeft(){ return left;}
+node* node::getRight(){ return right;}
+
+int node::getCounter() { return counter; }
+void node::incrementCounter() { counter++; }
