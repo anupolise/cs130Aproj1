@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	int arr[10]={6,8,4,3,9,7,10,2,11,1};
+	string arr[10] = {"aa","gs","gb","bb","be","hs","ja","ss","sd","as"};
 	BST binary;
 	binary.readInTree(arr, 10);
 
@@ -13,57 +13,63 @@ int main()
 	binary.printInOrder(binary.getHead());
 
 
-	cout<<"header: "<<(binary.getHead())->getValue()<<endl;
+	cout<<"header: "<<(binary.getHead())->getData()<<endl;
 	int countin= binary.countInTree(binary.getHead());
 	cout<<"count:"<<countin<<endl;
 	
-	bool the = binary.findVal(9, binary.getHead());
-	cout<<"facts 9 - "<<the<<std::flush;
+    int the = binary.search("hs");
+	cout<<"facts hs - "<<the<<std::flush;
 }
+
+
 BST::BST()
 {
-	head=NULL;
+	head = NULL;
 }
 
+void BST::insert (string str) { insert(str, head); }
 
-void BST::insertR(int num, node* headz)
+void BST::insert (string str, node* pointer)
 {
-	if(head==NULL)
+	if(pointer == NULL)
 	{
-		cout<<"head inserted:"<<num<<endl;
-		node* inte = new node(num);
-		head=inte;
-		cout<<"head init"<<endl;
+		//cout<<"head inserted:"<<str<<endl;
+		node* tmp = new node(str);
+		head=tmp;
+		//cout<<"head init"<<endl;
 	}
 	else
 	{
-		if(num>headz->getValue())
+		if(str > pointer->getData())
 		{
-			if(headz->getRight()==NULL)
+			if(pointer->getRight() == NULL)
 			{
-				node* inte = new node(num);
-				headz->setRight(inte);
-				cout<<"num inserted:"<<num<<endl;
+				node* tmp = new node(str);
+				pointer->setRight(tmp);
+                //cout<<"str inserted:"<<str<<endl;
 			}
 			else
 			{
-				insertR(num, headz->getRight());
+				insert(str, pointer->getRight());
 			}
 			
 		}
-		if(num<headz->getValue())
+		else if(str < pointer->getData())
 		{
-			if(headz->getLeft()==NULL)
+			if(pointer->getLeft() == NULL)
 			{
-				node* inte = new node(num);
-				headz->setLeft(inte);
-				cout<<"num inserted:"<<num<<endl;
+				node* tmp = new node(str);
+				pointer->setLeft(tmp);
+				//cout<<"str inserted:"<<str<<endl;
 			}
 			else
 			{
-				insertR(num, headz->getLeft());
+				insert(str, pointer->getLeft());
 			}
 		}
+        else {
+            pointer->incrementCounter ();
+        }
 	}
 }
 
@@ -85,42 +91,43 @@ void BST::printInOrder(node* headz)
 {
 	if(headz!=NULL)
 	{
-		
 		printInOrder(headz->getLeft());
-		cout<<headz->getValue()<< endl;
+		cout<<headz->getData()<< endl;
 		printInOrder(headz->getRight());
-
 	}
-	
 }
-bool BST::findVal(int num, node* headz)
+
+int BST::search(string str) { return search (str, head); }
+
+int BST::search(string str, node* pointer)
 {
-	if(headz==NULL)
+	if(pointer==NULL)
 	{
-		return false;
+		return 0;
 	}
-	else if(headz->getValue()==num)
+	else if(pointer->getData()==str)
 	{
-		return true;
+		return pointer->getCounter();
 	}
-	else if(headz->getValue()>num)
+	else if(pointer->getData()>str)
 	{
-		return findVal(num, headz->getLeft());
+		return search(str, pointer->getLeft());
 	}
-	else if(headz->getValue()<num)
+	else if(pointer->getData()<str)
 	{
-		return findVal(num, headz->getRight());
+		return search(str, pointer->getRight());
 	}
 	return false;
 }
-void BST::readInTree(int a[], int length)
+
+
+void BST::readInTree(string a[], int length)
 {
 	for(int i=0; i<length; i++)
 	{
-		insertR(a[i],head);
-	
+		insert(a[i]);
 	}
 }
 
 node* BST::getHead()
-{  return head;}
+{  return head; }

@@ -6,14 +6,15 @@ class BST
 {
 	private:
 		node* head;
-
+        void insert(string str, node* head);
+        int search(string str, node* head);
 	public:
 		BST();
-		void insertR(int num, node* head);
+		void insert(string str);
 		void printInOrder(node* head);
 		int countInTree(node* head);
-		bool findVal(int num, node* head);
-		void readInTree(int a[],int length);
+		int search(string str);
+		void readInTree(string a[],int length);
 		node* getHead();
 
 };
