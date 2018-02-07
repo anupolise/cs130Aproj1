@@ -27,7 +27,17 @@ node::node(string str, node* ptrL, node* ptrR)
     left=ptrL;
     right=ptrR;
 }
-	
+
+node::~node () {
+    //delete data;
+    if (left != NULL) {
+        delete left;
+    }
+    if (right != NULL) {
+        delete right;
+    }
+}
+
 void node::setLeft(node *ptr){left=ptr;}
 void node::setRight(node *ptr){ right=ptr;}
 void node::setData(string str){ data=str;}

@@ -16,7 +16,16 @@ int main()
 	cout<<"header: "<<(binary.getHead())->getData()<<endl;
 	int countin= binary.countInTree(binary.getHead());
 	cout<<"count:"<<countin<<endl;
+    
+    cout << "Range Search ";
+    
+    vector <string> *v = binary.rangeSearch ("ag", "zz");
+    for (int i = 0; i < v->size(); i++) {
+        cout << (*v)[i] << " ";
+    }
 	
+    cout << endl;
+    cout << endl;
     int the = binary.search("hs");
 	cout<<"facts hs - "<<the<<std::flush;
 }
@@ -25,6 +34,12 @@ int main()
 BST::BST()
 {
 	head = NULL;
+}
+
+BST::~BST() {
+    if (head != NULL) {
+        delete head;
+    }
 }
 
 void BST::insert (string str) { insert(str, head); }
@@ -131,3 +146,26 @@ void BST::readInTree(string a[], int length)
 
 node* BST::getHead()
 {  return head; }
+
+
+vector <string> * BST::rangeSearch (string a, string b) {
+    vector <string> *v;
+    rangeSearches (a, b, head, v);
+    return v;
+}
+
+void BST::rangeSearches (string a, string b, node* pointer, vector <string> *list) {
+    if (pointer != NULL) {
+        if (pointer->getData() < a) {
+            rangeSearches (a, b, pointer->getRight(), list);
+        }
+        else if (pointer->getData () > b) {
+            rangeSearches (a, b, pointer->getLeft(), list);
+        }
+        else {
+            list->push_back (pointer->getData());
+            rangeSearches (a, b, pointer->getRight(), list);
+            rangeSearches (a, b, pointer->getLeft(), list);
+        }
+    }
+}
