@@ -12,10 +12,17 @@ class nodeHT
 		//constructor
 		nodeHT();
 		nodeHT(string str);
-
+    
+    /*
+        void operator = (const nodeHT &N ) {
+            data = N.data;
+            counter = N.counter;
+        }
+ */
 		void setData(string str);
 		string getData();
         int getCounter ();
         void incrementCounter ();
+        void decrementCounter();
 };
 #endif

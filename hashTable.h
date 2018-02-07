@@ -5,21 +5,20 @@
 class hashTable
 {
 	private:
-		int *hashTbl[];
+		nodeHT **hashTbl;
 		int size;
-        void insert(string str);
-        int search(string str);
+        int indexOf(string str);
         int hashFunction(); 
 	public:
 		hashTable();
 		hashTable(int size);
-		void insert(string str);
-		int hash()
-		void sortInOrder();
-		int countInTable(node* head);
+        int hash(string str);
+		//void sortInOrder();
+		//int countInTable(nodeHT* head);
 		int search(string str);
+        void insert(string str);
 		void readInTable(string a[],int length);
-		void deleteInTable(string str);
+		//void deleteInTable(string str);
 
 
 };
