@@ -5,9 +5,9 @@ using namespace std;
 
 int main()
 {
-	string arr[10] = {"aa","gs","gb","bb","be","hs","ja","ss","sd","as"};
+	string arr[11] = {"aa","gs","gb","bb","be","hs","ja","ss","sd","as","hs"};
 	BST binary;
-	binary.readInTree(arr, 10);
+	binary.readInTree(arr, 11);
 
 
 	binary.printInOrder(binary.getHead());
@@ -17,17 +17,22 @@ int main()
 	int countin= binary.countInTree(binary.getHead());
 	cout<<"count:"<<countin<<endl;
     
-    cout << "Range Search ";
+    //string* v = binary.rangeSearch ("bd", "zz");
+    vector <string> v = binary.rangeSearch ("bd", "zz");
     
-    vector <string> *v = binary.rangeSearch ("ag", "zz");
-    for (int i = 0; i < v->size(); i++) {
-        cout << (*v)[i] << " ";
+    cout << "Range Search ";
+    for (int i = 0; i < v.size(); i++) {
+        cout << (v)[i] << " ";
     }
 	
     cout << endl;
     cout << endl;
     int the = binary.search("hs");
-	cout<<"facts hs - "<<the<<std::flush;
+	cout<<"search hs - "<<the<<endl<<std::flush;
+    
+    int ben = binary.search("jj");
+    cout<<"search jj - "<<ben<<endl<<std::flush;
+
 }
 
 
@@ -92,12 +97,12 @@ void BST::insert (string str, node* pointer)
 int BST::countInTree(node* headz)
 {
 	if(headz==NULL)
-	{
+    {
 		return 0;
 	}
 	else
-	{
-		return 1+countInTree(headz->getLeft())+countInTree(headz->getRight());
+    {
+		return headz->getCounter()+countInTree(headz->getLeft())+countInTree(headz->getRight());
 	}
 
 }
@@ -148,13 +153,13 @@ node* BST::getHead()
 {  return head; }
 
 
-vector <string> * BST::rangeSearch (string a, string b) {
-    vector <string> *v;
+vector<string> BST::rangeSearch (string a, string b) {
+    vector <string> v;
     rangeSearches (a, b, head, v);
     return v;
 }
 
-void BST::rangeSearches (string a, string b, node* pointer, vector <string> *list) {
+void BST::rangeSearches (string a, string b, node* pointer, vector <string> &list) {
     if (pointer != NULL) {
         if (pointer->getData() < a) {
             rangeSearches (a, b, pointer->getRight(), list);
@@ -163,7 +168,8 @@ void BST::rangeSearches (string a, string b, node* pointer, vector <string> *lis
             rangeSearches (a, b, pointer->getLeft(), list);
         }
         else {
-            list->push_back (pointer->getData());
+            //cout << pointer->getData() << endl;
+            list.push_back (pointer->getData());
             rangeSearches (a, b, pointer->getRight(), list);
             rangeSearches (a, b, pointer->getLeft(), list);
         }
