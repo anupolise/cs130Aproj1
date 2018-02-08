@@ -14,7 +14,8 @@ class hashTable
 		hashTable(int size);
         int hash(string str);
 		//void sortInOrder();
-		//int countInTable(nodeHT* head);
+		int countInTable();
+		void printTable();
 		int search(string str);
         void insert(string str);
 		void readInTable(string a[],int length);

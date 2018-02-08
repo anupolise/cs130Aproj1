@@ -34,6 +34,11 @@ int main()
     
     int ben = ht.search("jj");
     cout<<"search jj - "<<ben<<endl<<std::flush;
+
+    ht.printTable();
+
+    int count = ht.countInTable();
+    cout<<"count in tbale: "<<count<<endl;
     
 }
 
@@ -78,7 +83,18 @@ void hashTable::insert(string str) {
 }
 
 //void hashTable::sortInOrder();
-//int hashTable::countInTable(nodeHT* head);
+int hashTable::countInTable()
+{
+    int counter = 0;
+    for(int i=0; i< size; i++)
+    {
+        cout<<"Data: "<<hashTbl[i].getData()<<"  Count: "<<hashTbl[i].getCounter()<<endl;
+        counter+=hashTbl[i].getCounter();
+    }
+
+    return counter;
+
+}
 
 
 int hashTable::search(string str) {
@@ -136,5 +152,16 @@ int hashTable::hash (string str){
     return a + b + c + d;
 }
 
+void hashTable::printTable()
+{
+     int counter = 0;
+    for(int i=0; i< size; i++)
+    {
+        cout<<"index: "<< i;
+        cout<<"Data: "<<hashTbl[i].getData()<<"  Count: "<<hashTbl[i].getCounter()<<endl;
+ 
+    }
+
+}
 
 //void hashTable::deleteInTable(string str);
