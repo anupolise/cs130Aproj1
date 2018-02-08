@@ -29,8 +29,8 @@ int main()
     
     cout << endl;
     cout << endl;
-    int the = ht.search("hs");
-    cout<<"search hs - "<<the<<endl<<std::flush;
+    int the = ht.search("aa");
+    cout<<"search aa - "<<the<<endl<<std::flush;
     
     int ben = ht.search("jj");
     cout<<"search jj - "<<ben<<endl<<std::flush;
@@ -38,7 +38,7 @@ int main()
 }
 
 hashTable::hashTable() {
-    size = 101;
+    size = 13;
 	hashTbl =  new nodeHT[size];
 	for(int i=0; i<size; i++) {
 		hashTbl[i] =  nodeHT();
@@ -55,6 +55,7 @@ hashTable::hashTable(int s) {
 
 void hashTable::insert(string str) {
     int index = indexOf(str);
+    cout << index<< endl;
     if (index != -1) {
         hashTbl[index].incrementCounter ();
     }
@@ -62,11 +63,10 @@ void hashTable::insert(string str) {
         int startingIndex = hash (str)%size;
         int i = startingIndex;
         if(hashTbl[i].getCounter()<=0) {
-            nodeHT tmp = hashTbl [index];
             //cout << "11"<<endl;
-            tmp.incrementCounter();
+            hashTbl [i].incrementCounter();
             //cout << "22"<<endl;
-            tmp.setData (str);
+            hashTbl [i].setData (str);
         }
         i = (i+1)%size;
         while (i != startingIndex && hashTbl[i].getCounter() > 0) {
@@ -74,9 +74,8 @@ void hashTable::insert(string str) {
         }
         
         if(i != startingIndex) {
-            nodeHT tmp = hashTbl [index];
-            tmp.incrementCounter();
-            tmp.setData (str);
+            hashTbl [i].incrementCounter();
+            hashTbl [i].setData (str);
         }
     }
 }
@@ -100,10 +99,12 @@ int hashTable::indexOf (string str) {
     int i = startingIndex;
     //cout << "3";
     if(hashTbl[i].getData()==str) {
+        cout << hashTbl[i].getData()<<endl;
         return i;
     }
     i = (i+1)%size;
     //cout << "4";
+    cout << hashTbl[i].getData()<<endl;
     while (i != startingIndex && hashTbl[i].getData()!="") {
         //cout << "5";
         if(hashTbl[i].getData()==str) {
