@@ -7,7 +7,7 @@ int main()
 {
     string arr[13] = {"aa","gs","gb","bb","be","hs","ja","ss","sd","as","hs","aa","aa"};
     hashTable ht;
-    ht.readInTable(arr, 11);
+    ht.readInTable(arr, 13);
     
     
     //ht.printInOrder(ht.getHead());
@@ -55,7 +55,6 @@ hashTable::hashTable(int s) {
 
 void hashTable::insert(string str) {
     int index = indexOf(str);
-    cout << index<< endl;
     if (index != -1) {
         hashTbl[index].incrementCounter ();
     }
@@ -63,9 +62,7 @@ void hashTable::insert(string str) {
         int startingIndex = hash (str)%size;
         int i = startingIndex;
         if(hashTbl[i].getCounter()<=0) {
-            //cout << "11"<<endl;
             hashTbl [i].incrementCounter();
-            //cout << "22"<<endl;
             hashTbl [i].setData (str);
         }
         i = (i+1)%size;
@@ -97,16 +94,13 @@ int hashTable::search(string str) {
 int hashTable::indexOf (string str) {
     int startingIndex = hash (str)%size;
     int i = startingIndex;
-    //cout << "3";
     if(hashTbl[i].getData()==str) {
-        cout << hashTbl[i].getData()<<endl;
-        return i;
+           return i;
     }
     i = (i+1)%size;
-    //cout << "4";
-    cout << hashTbl[i].getData()<<endl;
+
     while (i != startingIndex && hashTbl[i].getData()!="") {
-        //cout << "5";
+
         if(hashTbl[i].getData()==str) {
             return i;
         }
@@ -118,9 +112,7 @@ int hashTable::indexOf (string str) {
 void hashTable::readInTable(string a[],int length) {
     for(int i=0; i<length; i++)
     {
-        //cout << i << endl;
         insert(a[i]);
-        //cout << i << endl;
     }
 }
 
@@ -129,21 +121,16 @@ int hashTable::hash (string str){
     int b = 551;
     int c = 257;
     int d = 613;
-    //cout << str.length() << endl;
     if (str.length() >= 1) {
-        //cout << str [0] << endl;
         a = a * int(str [0]);
     }
     if (str.length() >= 2) {
-        //cout << str [1] << endl;
         b = b * int(str [1]);
     }
     if (str.length() >= 3) {
-        //cout << str [2] << endl;
         c = c * int(str [2]);
     }
     if (str.length() >= 4) {
-        //cout << str [3] << endl;
         d = d * int(str [3]);
     }
     return a + b + c + d;
