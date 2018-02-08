@@ -5,7 +5,7 @@
 class hashTable
 {
 	private:
-		nodeHT **hashTbl;
+		nodeHT *hashTbl;
 		int size;
         int indexOf(string str);
         int hashFunction(); 

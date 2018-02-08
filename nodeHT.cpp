@@ -5,7 +5,7 @@ using namespace std;
 nodeHT::nodeHT()
 {
     data="";
-    counter = -1;   
+    counter = 0;
 }
 
 nodeHT::nodeHT(string str)
