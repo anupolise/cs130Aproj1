@@ -10,22 +10,23 @@ int main()
     ht.readInTable(arr, 13);
     
     
-    //ht.printInOrder(ht.getHead());
-    
+    vector <string> s = ht.sort();
+    for (int i = 0; i < s.size(); i++) {
+        cout << s[i] << endl;
+    }
     
     //cout<<"header: "<<(ht.getHead()).getData()<<endl;
     //int countin = ht.countInTree(ht.getHead());
     //cout<<"count:"<<countin<<endl;
     
-    /*
-    //string* v = ht.rangeSearch ("bd", "zz");
+    
     vector <string> v = ht.rangeSearch ("bd", "zz");
     
     cout << "Range Search ";
     for (int i = 0; i < v.size(); i++) {
         cout << (v)[i] << " ";
     }
-     */
+     
     
     cout << endl;
     cout << endl;
@@ -77,7 +78,30 @@ void hashTable::insert(string str) {
     }
 }
 
-//void hashTable::sortInOrder();
+vector <string> hashTable::sort() {
+    vector <string> s;
+    for (int i = 0; i < size; i++) {
+        if (hashTbl[i].getData() != "") {
+            for (int c = 0; c < hashTbl[i].getCounter(); c++) {
+                s.push_back (hashTbl[i].getData());
+            }
+        }
+    }
+    std::sort (s.begin(), s.end());
+    return s;
+}
+
+vector <string> hashTable::rangeSearch(string a, string b) {
+    vector <string> s;
+    for (int i = 0; i < size; i++) {
+        if (hashTbl[i].getData() != "" && hashTbl[i].getData() > a && hashTbl[i].getData() < b) {
+            for (int c = 0; c < hashTbl[i].getCounter(); c++) {
+                s.push_back (hashTbl[i].getData());
+            }
+        }
+    }
+    return s;
+}
 //int hashTable::countInTable(nodeHT* head);
 
 

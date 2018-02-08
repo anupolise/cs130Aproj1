@@ -1,5 +1,8 @@
 #ifndef hashTable_H
 #define hashTable_H
+
+#include <algorithm>
+#include <vector>
 #include "nodeHT.h"
 
 class hashTable
@@ -13,7 +16,8 @@ class hashTable
 		hashTable();
 		hashTable(int size);
         int hash(string str);
-		//void sortInOrder();
+		vector<string> rangeSearch(string a, string b);
+        vector<string> sort ();
 		//int countInTable(nodeHT* head);
 		int search(string str);
         void insert(string str);
