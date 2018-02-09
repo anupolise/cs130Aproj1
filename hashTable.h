@@ -15,6 +15,7 @@ class hashTable
 	public:
 		hashTable();
 		hashTable(int size);
+        ~hashTable ();
         int hash(string str);
 
 		//void sortInOrder();

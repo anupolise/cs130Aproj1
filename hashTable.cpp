@@ -59,6 +59,10 @@ hashTable::hashTable(int s) {
 	size = s;
 }
 
+hashTable::~hashTable () {
+    delete []hashTbl;
+}
+
 void hashTable::insert(string str) {
     int index = indexOf(str);
     if (index != -1) {
@@ -86,7 +90,6 @@ void hashTable::insert(string str) {
 }
 
 
-//void hashTable::sortInOrder();
 int hashTable::countInTable()
 {
     int counter = 0;
@@ -123,7 +126,6 @@ vector <string> hashTable::rangeSearch(string a, string b) {
     }
     return s;
 }
-//int hashTable::countInTable(nodeHT* head);
 
 
 
@@ -187,7 +189,7 @@ void hashTable::printTable()
     for(int i=0; i< size; i++)
     {
         cout<<"index: "<< i;
-        cout<<"Data: "<<hashTbl[i].getData()<<"  Count: "<<hashTbl[i].getCounter()<<endl;
+        cout<<" Data: "<<hashTbl[i].getData()<<"  Count: "<<hashTbl[i].getCounter()<<endl;
  
     }
 
