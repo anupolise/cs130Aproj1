@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    string arr[13] = {"aa","gs","gb","bb","be","hs","ja","ss","sd","as","hs","aa","aa"};
+    string arr[13] = {"aa","js", "bb", "hs", "sdt", "sdd", "fw", "tt", "zz", "aawe", "gewt", "aa", "gg"};
     hashTable ht;
     ht.readInTable(arr, 13);
     
@@ -39,12 +39,12 @@ int main()
     ht.printTable();
 
     int count = ht.countInTable();
-    cout<<"count in tbale: "<<count<<endl;
+    cout<<"count in table: "<<count<<endl;
     
 }
 
 hashTable::hashTable() {
-    size = 13;
+    size = 101;
 	hashTbl =  new nodeHT[size];
 	for(int i=0; i<size; i++) {
 		hashTbl[i] =  nodeHT();
@@ -71,14 +71,16 @@ void hashTable::insert(string str) {
             hashTbl [i].incrementCounter();
             hashTbl [i].setData (str);
         }
-        i = (i+1)%size;
-        while (i != startingIndex && hashTbl[i].getCounter() > 0) {
+        else {
             i = (i+1)%size;
-        }
+            while (i != startingIndex && hashTbl[i].getCounter() > 0) {
+                i = (i+1)%size;
+            }
         
-        if(i != startingIndex) {
-            hashTbl [i].incrementCounter();
-            hashTbl [i].setData (str);
+            if(i != startingIndex) {
+                hashTbl [i].incrementCounter();
+                hashTbl [i].setData (str);
+            }
         }
     }
 }
@@ -154,8 +156,7 @@ int hashTable::indexOf (string str) {
 }
 
 void hashTable::readInTable(string a[],int length) {
-    for(int i=0; i<length; i++)
-    {
+    for(int i=0; i<length; i++) {
         insert(a[i]);
     }
 }
