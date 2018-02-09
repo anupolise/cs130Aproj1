@@ -35,9 +35,9 @@ int main()
     
     int ben = ht.search("jj");
     cout<<"search jj - "<<ben<<endl<<std::flush;
-
+    
+    ht.deleteValue ("gg");
     ht.printTable();
-
     int count = ht.countInTable();
     cout<<"count in table: "<<count<<endl;
     
@@ -62,6 +62,8 @@ hashTable::hashTable(int s) {
 hashTable::~hashTable () {
     delete []hashTbl;
 }
+
+
 
 void hashTable::insert(string str) {
     int index = indexOf(str);
@@ -195,4 +197,9 @@ void hashTable::printTable()
 
 }
 
-//void hashTable::deleteInTable(string str);
+void hashTable::deleteValue(string str) {
+    int index = indexOf (str);
+    if (index != -1) {
+        hashTbl[index].decrementCounter ();
+    }
+}
