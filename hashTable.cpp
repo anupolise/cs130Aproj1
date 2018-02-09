@@ -3,45 +3,6 @@
 
 using namespace std;
 
-int main()
-{
-    string arr[13] = {"aa","js", "bb", "hs", "sdt", "sdd", "fw", "tt", "zz", "aawe", "gewt", "aa", "gg"};
-    hashTable ht;
-    ht.readInTable(arr, 13);
-    
-    
-    vector <string> s = ht.sort();
-    for (int i = 0; i < s.size(); i++) {
-        cout << s[i] << endl;
-    }
-    
-    //cout<<"header: "<<(ht.getHead()).getData()<<endl;
-    //int countin = ht.countInTree(ht.getHead());
-    //cout<<"count:"<<countin<<endl;
-    
-    
-    vector <string> v = ht.rangeSearch ("bd", "zz");
-    
-    cout << "Range Search ";
-    for (int i = 0; i < v.size(); i++) {
-        cout << (v)[i] << " ";
-    }
-     
-    
-    cout << endl;
-    cout << endl;
-    int the = ht.search("aa");
-    cout<<"search aa - "<<the<<endl<<std::flush;
-    
-    int ben = ht.search("jj");
-    cout<<"search jj - "<<ben<<endl<<std::flush;
-
-    ht.printTable();
-
-    int count = ht.countInTable();
-    cout<<"count in table: "<<count<<endl;
-    
-}
 
 hashTable::hashTable() {
     size = 101;
@@ -58,6 +19,12 @@ hashTable::hashTable(int s) {
 	}
 	size = s;
 }
+
+hashTable::~hashTable () {
+    delete []hashTbl;
+}
+
+
 
 void hashTable::insert(string str) {
     int index = indexOf(str);
@@ -86,7 +53,6 @@ void hashTable::insert(string str) {
 }
 
 
-//void hashTable::sortInOrder();
 int hashTable::countInTable()
 {
     int counter = 0;
@@ -123,7 +89,6 @@ vector <string> hashTable::rangeSearch(string a, string b) {
     }
     return s;
 }
-//int hashTable::countInTable(nodeHT* head);
 
 
 
@@ -187,10 +152,15 @@ void hashTable::printTable()
     for(int i=0; i< size; i++)
     {
         cout<<"index: "<< i;
-        cout<<"Data: "<<hashTbl[i].getData()<<"  Count: "<<hashTbl[i].getCounter()<<endl;
+        cout<<" Data: "<<hashTbl[i].getData()<<"  Count: "<<hashTbl[i].getCounter()<<endl;
  
     }
 
 }
 
-//void hashTable::deleteInTable(string str);
+void hashTable::deleteValue(string str) {
+    int index = indexOf (str);
+    if (index != -1) {
+        hashTbl[index].decrementCounter ();
+    }
+}

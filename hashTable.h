@@ -15,6 +15,7 @@ class hashTable
 	public:
 		hashTable();
 		hashTable(int size);
+        ~hashTable ();
         int hash(string str);
 
 		//void sortInOrder();
@@ -28,7 +29,7 @@ class hashTable
 		int search(string str);
         void insert(string str);
 		void readInTable(string a[],int length);
-		//void deleteInTable(string str);
+		void deleteValue(string str);
 
 
 };
