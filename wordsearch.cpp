@@ -31,7 +31,8 @@ int main(int argc, char* argv[])
 {
     string dir; //
     vector<string> files = vector<string>();
-    List wordIndex;
+    hashTable wordIndex;
+    BST wordIndex2;
     
     if (argc < 2)
     {
@@ -58,7 +59,8 @@ int main(int argc, char* argv[])
             if(fin.eof()) {cout << "EOF " << files[i] << endl; break;}
             fin>>word;
             // cout<<"       " << files[i]<<"::"<<word<<endl;
-            wordIndex.addWord(word,(files[i]).c_str());
+            wordIndex.insert(word);
+            wordIndex2.insert(word);
             // Now the string "word" holds the keyword, and the string "files[i]" holds the document name.
             // Use these two strings to search/insert in your linked lists
         }
@@ -69,7 +71,14 @@ int main(int argc, char* argv[])
         cout << "\nInput word or enter \"exit!\" to exit:" << endl;
         cin >> word_to_be_found;
         if (word_to_be_found != ("exit!")) {
-            wordIndex.print(word_to_be_found);
+            if (wordIndex.search(word_to_be_found) >= 1) {
+                cout << "true" << endl;
+            }
+            if (wordIndex2.search (word_to_be_found) >= 1) {
+                cout << "true" << endl;
+            }
+            
+            //wordIndex.print(word_to_be_found);
         }
     } while (word_to_be_found != ("exit!"));
     

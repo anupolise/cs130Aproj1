@@ -13,7 +13,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "list.h"
+#include "hashTable.h"
+#include "BST.h"
 //#include "document.h"
 
 int getdir (string dir, vector<string> &files);
