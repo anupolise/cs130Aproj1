@@ -13,25 +13,30 @@ int main()
 	binary.printInOrder(binary.getHead());
 
 
-	cout<<"header: "<<(binary.getHead())->getData()<<endl;
-	int countin= binary.countInTree(binary.getHead());
-	cout<<"count:"<<countin<<endl;
+	//cout<<"header: "<<(binary.getHead())->getData()<<endl;
+	// int countin= binary.countInTree(binary.getHead());
+	// cout<<"count:"<<countin<<endl;
     
-    //string* v = binary.rangeSearch ("bd", "zz");
-    vector <string> v = binary.rangeSearch ("bd", "zz");
+ //    //string* v = binary.rangeSearch ("bd", "zz");
+ //    vector <string> v = binary.rangeSearch ("bd", "zz");
     
-    cout << "Range Search ";
-    for (int i = 0; i < v.size(); i++) {
-        cout << (v)[i] << " ";
-    }
+ //    cout << "Range Search ";
+ //    for (int i = 0; i < v.size(); i++) {
+ //        cout << (v)[i] << " ";
+ //    }
 	
-    cout << endl;
-    cout << endl;
-    int the = binary.search("hs");
-	cout<<"search hs - "<<the<<endl<<std::flush;
+ //    cout << endl;
+ //    cout << endl;
+ //    int the = binary.search("hs");
+	// cout<<"search hs - "<<the<<endl<<std::flush;
     
-    int ben = binary.search("jj");
-    cout<<"search jj - "<<ben<<endl<<std::flush;
+ //    int ben = binary.search("jj");
+ //    cout<<"search jj - "<<ben<<endl<<std::flush;
+
+    binary.deleteNode("aa");
+    cout<<"deketed aa "<<endl;
+    binary.printInOrder(binary.getHead());
+
 
 }
 
@@ -174,4 +179,87 @@ void BST::rangeSearches (string a, string b, node* pointer, vector <string> &lis
             rangeSearches (a, b, pointer->getLeft(), list);
         }
     }
+}
+
+
+node* BST::searchNode(string str, node* pointer)
+{
+	if(pointer==NULL)
+	{
+		return 0;
+	}
+	else if(pointer->getData()==str)
+	{
+		return pointer;
+	}
+	else if(pointer->getData()>str)
+	{
+		return searchNode(str, pointer->getLeft());
+	}
+	else if(pointer->getData()<str)
+	{
+		return searchNode(str, pointer->getRight());
+	}
+	return NULL;
+}
+
+node* BST::findSmallNode(node* pointer)
+{
+	if(pointer->getLeft() == NULL && pointer->getRight() == NULL)
+	{
+		return pointer;
+	}
+	else if(pointer->getLeft()== NULL && pointer->getRight()!=NULL)
+	{
+		return pointer;
+	}
+	else 
+	{
+		findSmallNode(pointer->getRight());
+	}
+
+	return NULL;
+
+}
+
+
+void BST::deleteNode(string str)
+{
+	cout<<"before search"<<endl;
+	node* nodeVal = searchNode(str, head);
+	cout<<"after search"<<endl;
+
+	cout<<"node val: "<<nodeVal->getData()<<endl;
+
+	if(nodeVal == NULL)
+	{
+		cout<<"Cannot delete: value not found"<<endl;
+	}
+	else
+	{
+		if(nodeVal->getCounter()>1)
+		{
+			cout<<"node val counter BEFORE: "<<nodeVal->getCounter()<<endl;
+			nodeVal->decrementCounter();
+			cout<<"node val counter AFTER: "<<nodeVal->getCounter()<<endl;
+		}
+		else 
+		{
+			//actually deleting the node
+
+			//for a leaf node
+			if(nodeVal->getLeft() == NULL && nodeVal->getRight() == NULL)
+			{
+				delete nodeVal;
+			}
+
+			else
+			{
+				node* switched = findSmallNode(nodeVal);
+				nodeVal->setData(switched->getData());
+				nodeVal->setCounter(switched->getCounter());
+				delete switched;
+			}
+		}
+	}
 }

@@ -23,6 +23,8 @@ class node
 		string getData();
         int getCounter ();
         void incrementCounter ();
+        void decrementCounter();
+        void setCounter(int count);
 		node* getLeft();
 		node* getRight();
 

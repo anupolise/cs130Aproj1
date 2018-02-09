@@ -9,7 +9,9 @@ class BST
 		node* head;
         void insert(string str, node* head);
         int search(string str, node* head);
+        node* searchNode(string str, node* head);
         void rangeSearches (string a, string b, node* pointer, vector <string> &list);
+        node* findSmallNode(node* pointer);
 	public:
 		BST();
         ~BST();
@@ -18,6 +20,7 @@ class BST
 		int countInTree(node* head);
 		int search(string str);
 		void readInTree(string a[],int length);
+		void deleteNode(string str);
 		node* getHead();
         vector <string>rangeSearch (string a, string b);
 };

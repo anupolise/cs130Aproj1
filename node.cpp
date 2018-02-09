@@ -47,3 +47,6 @@ node* node::getRight(){ return right;}
 
 int node::getCounter() { return counter; }
 void node::incrementCounter() { counter++; }
+void node::decrementCounter() { counter--; }
+void node::setCounter(int count){ counter = count;}
+
