@@ -211,6 +211,11 @@ void deletion (hashTable &wordIndex, BST &wordIndex2) {
 
 
 void sorted (hashTable &wordIndex, BST &wordIndex2) {
+    string path = "output.txt";
+    cout<<path<<endl;
+
+    ofstream output;
+    output.open(path);
 
     
     struct timeb timer_msec;
@@ -233,6 +238,19 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
+
+
+    for(int i=0; i<s1.size(); i++)
+    {
+        output<<s1[i]<<endl;
+    }
+
+    output<<endl;
+
+    for(int i=0; i<s2.size(); i++)
+    {
+        output<<s2[i]<<endl;
+    }
 }
 
 
