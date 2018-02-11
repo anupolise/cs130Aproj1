@@ -187,17 +187,15 @@ void deletion (hashTable &wordIndex, BST &wordIndex2) {
 
 
 void sorted (hashTable &wordIndex, BST &wordIndex2) {
-    string word_to_delete;
-    cout << "> ";
-    cin >> word_to_delete;
+
     
     struct timeb timer_msec;
     long long int timestamp_msec_before, timestamp_msec_after;
     if (!ftime(&timer_msec)) {
         timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
-    
-    wordIndex2.deleteNode(word_to_delete); // BST
+    vector <string> s1;
+    wordIndex2.sorted(wordIndex2.getHead(), s1); // BST
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
@@ -206,11 +204,42 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
         timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     
-    wordIndex.deleteValue (word_to_delete); // HT
+    vector <string> s2 = wordIndex.sort(); // HT
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
 }
 
+void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
+    string lower, higher;
+    cout << "> ";
+    cin >> lower;
+    cout << "> ";
+    cin >> higher;
+    struct timeb timer_msec;
+    long long int timestamp_msec_before, timestamp_msec_after;
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    
+    vector <string> s1 = wordIndex2.rangedSearch(lower, higher); // BST
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    
+    for (int i = 0; i < s.size(); i++) {
+        cout <<s1[i]<<endl;
+    }
+    cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    
+    vector <string> s2 = wordIndex.rangedSearch (lower, higher); // HT
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
+}
 
