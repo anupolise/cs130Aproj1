@@ -97,7 +97,8 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void search (hashTable wordIndex, BST wordIndex2) {
+void search (hashTable &wordIndex, BST &wordIndex2) {
+    //cout << endl;
     string word_to_be_found;
     cout << "> ";
     cin >> word_to_be_found;
@@ -111,19 +112,25 @@ void search (hashTable wordIndex, BST wordIndex2) {
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
+    if (n > 0) {
+        cout << "true" << endl;
+    }
+    else {
+        cout << "false" << endl;
+    }
     cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
         if (!ftime(&timer_msec)) {
         timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
 
-    n = wordIndex.search (word_to_be_found); // BST
+    n = wordIndex.search (word_to_be_found); // HT
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
 }
 
-void insert (hashTable wordIndex, BST wordIndex2) {
+void insert (hashTable &wordIndex, BST &wordIndex2) {
     string word_to_insert;
     cout << "> ";
     cin >> word_to_insert;
@@ -143,15 +150,15 @@ void insert (hashTable wordIndex, BST wordIndex2) {
         timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     
-    wordIndex.insert (word_to_insert); // BST
+    wordIndex.insert (word_to_insert); // HT
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
 }
 
-/*
-void deletion (hashTable wordIndex, BST wordIndex2) {
+
+void deletion (hashTable &wordIndex, BST &wordIndex2) {
     string word_to_delete;
     cout << "> ";
     cin >> word_to_delete;
@@ -162,7 +169,7 @@ void deletion (hashTable wordIndex, BST wordIndex2) {
         timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     
-    wordIndex2.deletio(word_to_insert); // BST
+    wordIndex2.deleteNode(word_to_delete); // BST
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
@@ -171,10 +178,39 @@ void deletion (hashTable wordIndex, BST wordIndex2) {
         timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     
-    wordIndex.insert (word_to_insert); // BST
+    wordIndex.deleteValue (word_to_delete); // HT
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
 }
- */
+
+
+void sorted (hashTable &wordIndex, BST &wordIndex2) {
+    string word_to_delete;
+    cout << "> ";
+    cin >> word_to_delete;
+    
+    struct timeb timer_msec;
+    long long int timestamp_msec_before, timestamp_msec_after;
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    
+    wordIndex2.deleteNode(word_to_delete); // BST
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    
+    wordIndex.deleteValue (word_to_delete); // HT
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
+}
+
+
