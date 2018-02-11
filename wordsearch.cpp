@@ -89,26 +89,36 @@ int main(int argc, char* argv[])
     
     cout << wordIndex2.countInTree(wordIndex2.getHead());
     
-    string word_to_be_found;
+    //string word_to_be_found;
     do {
-        cout << "\nInput word or enter \"exit!\" to exit:" << endl;
-        cin >> word_to_be_found;
-        if (word_to_be_found != ("exit!")) {
-            int n = wordIndex2.search (word_to_be_found);
-            
-            if (wordIndex.search(word_to_be_found) >= 1) {
-                cout << "true" << endl;
-            }
-            if (n >= 1) {
-                cout << "true " << n << endl;
-            }
-            else {
-                cout << "false" << endl;
-            }
-            
-            //wordIndex.print(word_to_be_found);
-        }
-    } while (word_to_be_found != ("exit!"));
+        search(wordIndex, wordIndex2);
+    } while (true);
     
     return 0;
+}
+
+void search (hashTable wordIndex, BST wordIndex2) {
+    string word_to_be_found;
+    cout << "> ";
+    cin >> word_to_be_found;
+    struct timeb timer_msec;
+    long long int timestamp_msec_before, timestamp_msec_after;
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+
+    int n = wordIndex2.search (word_to_be_found); // BST
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
+        if (!ftime(&timer_msec)) {
+        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+
+    n = wordIndex.search (word_to_be_found); // BST
+    if (!ftime(&timer_msec)) {
+        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    }
+    cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
 }

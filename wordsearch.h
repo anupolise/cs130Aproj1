@@ -16,11 +16,20 @@
 #include "BST.h"
 #include <algorithm>
 
+#include <time.h>
+#include <sys/timeb.h>
+#include <sys/time.h>
+
 //#include "document.h"
 
 int getdir (string dir, vector<string> &files);
 bool makeAlphaNum(string str);
 
+void search (hashTable wordIndex, BST wordIndex2);
+void insert ();
+void deletion ();
+void sorted ();
+void rangedSearch();
 
 
 int main(int argc, char* argv[]);
