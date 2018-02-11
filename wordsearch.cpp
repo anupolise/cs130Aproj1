@@ -127,15 +127,17 @@ void search (hashTable &wordIndex, BST &wordIndex2) {
     string word_to_be_found;
     cout << "> ";
     cin >> word_to_be_found;
-    struct timeb timer_msec;
-    long long int timestamp_msec_before, timestamp_msec_after;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    struct timeval timer_usec;
+    long long int timestamp_usec_before, timestamp_usec_after;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
 
     int n = wordIndex2.search (word_to_be_found); // BST
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     if (n > 0) {
         cout << "true" << endl;
@@ -143,16 +145,18 @@ void search (hashTable &wordIndex, BST &wordIndex2) {
     else {
         cout << "false" << endl;
     }
-    cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
-        if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
 
     n = wordIndex.search (word_to_be_found); // HT
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
-    cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
+    cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
 }
 
 void insert (hashTable &wordIndex, BST &wordIndex2) {
@@ -160,26 +164,30 @@ void insert (hashTable &wordIndex, BST &wordIndex2) {
     cout << "> ";
     cin >> word_to_insert;
     
-    struct timeb timer_msec;
-    long long int timestamp_msec_before, timestamp_msec_after;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    struct timeval timer_usec;
+    long long int timestamp_usec_before, timestamp_usec_after;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     
     wordIndex2.insert (word_to_insert); // BST
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
-    cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     
     wordIndex.insert (word_to_insert); // HT
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
-    cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
+    cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
 }
 
 
@@ -188,26 +196,30 @@ void deletion (hashTable &wordIndex, BST &wordIndex2) {
     cout << "> ";
     cin >> word_to_delete;
     
-    struct timeb timer_msec;
-    long long int timestamp_msec_before, timestamp_msec_after;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    struct timeval timer_usec;
+    long long int timestamp_usec_before, timestamp_usec_after;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     
     wordIndex2.deleteNode(word_to_delete); // BST
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
-    cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     
     wordIndex.deleteValue (word_to_delete); // HT
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
-    cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
+    cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
 }
 
 
@@ -219,26 +231,31 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
     output.open(path);
 
     
-    struct timeb timer_msec;
-    long long int timestamp_msec_before, timestamp_msec_after;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    struct timeval timer_usec;
+    long long int timestamp_usec_before, timestamp_usec_after;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     vector <string> s1;
     wordIndex2.sorted(wordIndex2.getHead(), s1); // BST
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
-    cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    
+    cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     
     vector <string> s2 = wordIndex.sort(); // HT
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
-    cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
+    cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
 
 
     for(int i=0; i<s1.size(); i++)
@@ -261,29 +278,34 @@ void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
     cin >> lower;
     cout << "> ";
     cin >> higher;
-    struct timeb timer_msec;
-    long long int timestamp_msec_before, timestamp_msec_after;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    struct timeval timer_usec;
+    long long int timestamp_usec_before, timestamp_usec_after;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     
     vector <string> s1 = wordIndex2.rangeSearch(lower, higher); // BST
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     
     for (int i = 0; i < s1.size(); i++) {
         cout <<s1[i]<<endl;
     }
-    cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
     
     vector <string> s2 = wordIndex.rangeSearch (lower, higher); // HT
-    if (!ftime(&timer_msec)) {
-        timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
+    if (!gettimeofday(&timer_usec, NULL)) {
+        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+        (long long int) timer_usec.tv_usec;
     }
-    cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
+
+    cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
 }
 
