@@ -1,7 +1,7 @@
 
 // wordsearch.cpp
 // 1/27/17
-// Agrawal
+// Credits to Agrawal for the file traversal in CS24.
 //
 
 
@@ -16,7 +16,7 @@ int getdir (string dir, vector<string> &files)
     DIR *dp;
     struct dirent *dirp;
     if((dp  = opendir(dir.c_str())) == NULL) {
-        cout << "Error(" << errno << ") opening " << dir << endl;
+        //cout << "Error(" << errno << ") opening " << dir << endl;
         return errno;
     }
     
@@ -29,17 +29,20 @@ int getdir (string dir, vector<string> &files)
     closedir(dp);
     return 0;
 }
+
 bool checkAlphaNum(string str)
 {
     for(int i=0; i< str.length(); i++)
     {
-        if(!isalnum(str[i]))
+        if(!isalpha(str[i]))
         {
             return false;
         }
     }
     return true;
 }
+
+
 int main(int argc, char* argv[])
 {
     string dir; //
@@ -55,7 +58,7 @@ int main(int argc, char* argv[])
     dir = string(argv[1]);
     if (getdir(dir,files)!=0)
     {
-        cout << "Error opening " << dir << "; Exiting ..." << endl;
+        //cout << "Error opening " << dir << "; Exiting ..." << endl;
         return(-2);
     }
     
@@ -65,14 +68,14 @@ int main(int argc, char* argv[])
     int count = 0;
     for (unsigned int i = 0; i < files.size(); i++) {
         if(files[i][0]=='.') continue; //skip hidden files
-        cout << "OPEN " << files[i] << endl;
+        //cout << "OPEN " << files[i] << endl;
         ifstream fin((files[i]).c_str()); //open using absolute path
         // ...read the file..
         string word;
         while(!fin.eof()){
             count ++;
             fin>>word;
-            cout<<"       " << files[i]<<"::"<<word<<endl;
+            //cout<<"       " << files[i]<<"::"<<word<<endl;
             if(checkAlphaNum(word))
             {
                 wordIndex.insert(word);
@@ -82,16 +85,18 @@ int main(int argc, char* argv[])
             // Now the string "word" holds the keyword, and the string "files[i]" holds the document name.
             // Use these two strings to search/insert in your linked lists
         }
-        cout << "EOF " << files[i] << endl;
-        cout << count<<endl;
+        //cout << "EOF " << files[i] << endl;
+        //cout << count<<endl;
         fin.close();
     }
     
-    cout << wordIndex2.countInTree(wordIndex2.getHead());
+    //cout << wordIndex2.countInTree(wordIndex2.getHead());
     
     //string word_to_be_found;
     int userInput = 0;
     while (true){
+        cout << "> ./main" << endl;
+        cout << "> ";
         cin>>userInput;
         if(userInput == 1)
         {
@@ -113,11 +118,7 @@ int main(int argc, char* argv[])
         {
             rangedSearch(wordIndex, wordIndex2);
         }
-
-
     }
-    
-    
     return 0;
 }
 
