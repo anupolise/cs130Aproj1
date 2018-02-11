@@ -90,9 +90,33 @@ int main(int argc, char* argv[])
     cout << wordIndex2.countInTree(wordIndex2.getHead());
     
     //string word_to_be_found;
-    do {
-        search(wordIndex, wordIndex2);
-    } while (true);
+    int userInput = 0;
+    while (true){
+        cin<<userInput
+        if(userInput == 1)
+        {
+             search(wordIndex, wordIndex2);
+        }
+        else if(userInput == 2)
+        {
+            insert(wordIndex, wordIndex2);
+        }
+        else if(userInput == 3)
+        {
+            deletion(wordIndex, wordIndex2);
+        }
+        else if(userInput == 4)
+        {
+            sorted(wordIndex, wordIndex2);
+        }
+        else if(userInput ==5)
+        {
+            rangeSarch(wordIndex, wordIndex2);
+        }
+
+
+    }
+    
     
     return 0;
 }
@@ -212,5 +236,4 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
     }
     cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
 }
-
 
