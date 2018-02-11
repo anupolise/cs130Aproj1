@@ -12,6 +12,7 @@ class BST
         node* searchNode(string str, node* head);
         void rangeSearches (string a, string b, node* pointer, vector <string> &list);
         node* findSmallNode(node* pointer);
+        node* deleteNodeHelper (string str, node* pointer);
 	public:
 		BST();
         ~BST();
@@ -23,5 +24,6 @@ class BST
 		void deleteNode(string str);
 		node* getHead();
         vector <string>rangeSearch (string a, string b);
+        void sorted (node* headz, vector <string> &list);
 };
 #endif

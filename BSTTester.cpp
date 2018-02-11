@@ -6,9 +6,9 @@ using namespace std;
 
 int main()
 {
-    string arr[11] = {"aa","gs","gb","bb","be","hs","ja","ss","sd","as","hs"};
+    string arr[14] = {"aa","gs","gb","bb","be","hs","ja","ss","sd","as","hs","aa","ja","aa"};
     BST binary;
-    binary.readInTree(arr, 11);
+    binary.readInTree(arr, 14);
     
     
     binary.printInOrder(binary.getHead());
@@ -33,5 +33,16 @@ int main()
     
     int ben = binary.search("jj");
     cout<<"search jj - "<<ben<<endl<<std::flush;
+
+
+    binary.deleteNode("ja");
+    binary.deleteNode("ja");
+    binary.deleteNode("aa");
+    binary.deleteNode("aa");
+    binary.deleteNode("aa");
+    binary.deleteNode("aa");
+    //binary.insert ("aa");
+    cout<<"dekte ja"<<endl;
+    binary.printInOrder(binary.getHead());
     
 }
