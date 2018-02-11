@@ -90,9 +90,33 @@ int main(int argc, char* argv[])
     cout << wordIndex2.countInTree(wordIndex2.getHead());
     
     //string word_to_be_found;
-    do {
-        search(wordIndex, wordIndex2);
-    } while (true);
+    int userInput = 0;
+    while (true){
+        cin>>userInput;
+        if(userInput == 1)
+        {
+             search(wordIndex, wordIndex2);
+        }
+        else if(userInput == 2)
+        {
+            insert(wordIndex, wordIndex2);
+        }
+        else if(userInput == 3)
+        {
+            deletion(wordIndex, wordIndex2);
+        }
+        else if(userInput == 4)
+        {
+            sorted(wordIndex, wordIndex2);
+        }
+        else if(userInput ==5)
+        {
+            rangedSearch(wordIndex, wordIndex2);
+        }
+
+
+    }
+    
     
     return 0;
 }
@@ -211,6 +235,7 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
     cout << "Hash: " << timestamp_msec_after - timestamp_msec_before<< " milliseconds." << endl;
 }
 
+
 void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
     string lower, higher;
     cout << "> ";
@@ -223,12 +248,12 @@ void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
         timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     
-    vector <string> s1 = wordIndex2.rangedSearch(lower, higher); // BST
+    vector <string> s1 = wordIndex2.rangeSearch(lower, higher); // BST
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     
-    for (int i = 0; i < s.size(); i++) {
+    for (int i = 0; i < s1.size(); i++) {
         cout <<s1[i]<<endl;
     }
     cout << "BST: " << timestamp_msec_after - timestamp_msec_before << " milliseconds." << endl;
@@ -236,7 +261,7 @@ void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
         timestamp_msec_before = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
     
-    vector <string> s2 = wordIndex.rangedSearch (lower, higher); // HT
+    vector <string> s2 = wordIndex.rangeSearch (lower, higher); // HT
     if (!ftime(&timer_msec)) {
         timestamp_msec_after = ((long long int) timer_msec.time) *100011 + (long long int)timer_msec.millitm;
     }
