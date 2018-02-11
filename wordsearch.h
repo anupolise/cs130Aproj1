@@ -1,8 +1,7 @@
 // Lawrence Lim
-// Derek Zhang
+// Anu Polisetty
+
 // wordsearch.h
-// 1/27/17
-// CS24
 //
 
 
@@ -15,8 +14,13 @@
 #include <fstream>
 #include "hashTable.h"
 #include "BST.h"
+#include <algorithm>
+
 //#include "document.h"
 
 int getdir (string dir, vector<string> &files);
+bool makeAlphaNum(string str);
+
+
 
 int main(int argc, char* argv[]);

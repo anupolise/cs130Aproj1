@@ -29,7 +29,17 @@ int getdir (string dir, vector<string> &files)
     closedir(dp);
     return 0;
 }
-
+bool checkAlphaNum(string str)
+{
+    for(int i=0; i< str.length(); i++)
+    {
+        if(!isalnum(str[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
 int main(int argc, char* argv[])
 {
     string dir; //
@@ -63,8 +73,12 @@ int main(int argc, char* argv[])
             count ++;
             fin>>word;
             cout<<"       " << files[i]<<"::"<<word<<endl;
-            wordIndex.insert(word);
-            wordIndex2.insert(word);
+            if(checkAlphaNum(word))
+            {
+                wordIndex.insert(word);
+                wordIndex2.insert(word);
+            }
+           
             // Now the string "word" holds the keyword, and the string "files[i]" holds the document name.
             // Use these two strings to search/insert in your linked lists
         }
