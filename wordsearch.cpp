@@ -21,7 +21,10 @@ int getdir (string dir, vector<string> &files)
     }
     
     while ((dirp = readdir(dp)) != NULL) {
-        files.push_back(string(dirp->d_name));
+        if (string(dirp->d_name) != "." && string(dirp->d_name) != "..") {
+            getdir (dir+"/"+string(dirp->d_name), files);
+            files.push_back(string(dir+"/"+dirp->d_name));
+        }
     }
     closedir(dp);
     return 0;
@@ -31,7 +34,7 @@ int main(int argc, char* argv[])
 {
     string dir; //
     vector<string> files = vector<string>();
-    hashTable wordIndex;
+    hashTable wordIndex (77747);
     BST wordIndex2;
     
     if (argc < 2)
@@ -49,33 +52,44 @@ int main(int argc, char* argv[])
     // THIS PART OF THE CODE SETS UP THE INVERTED INDEX
     
     string slash("/");
+    int count = 0;
     for (unsigned int i = 0; i < files.size(); i++) {
         if(files[i][0]=='.') continue; //skip hidden files
         cout << "OPEN " << files[i] << endl;
-        ifstream fin((string(argv[1])+slash+files[i]).c_str()); //open using absolute path
+        ifstream fin((files[i]).c_str()); //open using absolute path
         // ...read the file..
         string word;
-        while(true){
-            if(fin.eof()) {cout << "EOF " << files[i] << endl; break;}
+        while(!fin.eof()){
+            count ++;
             fin>>word;
-            // cout<<"       " << files[i]<<"::"<<word<<endl;
+            cout<<"       " << files[i]<<"::"<<word<<endl;
             wordIndex.insert(word);
             wordIndex2.insert(word);
             // Now the string "word" holds the keyword, and the string "files[i]" holds the document name.
             // Use these two strings to search/insert in your linked lists
         }
+        cout << "EOF " << files[i] << endl;
+        cout << count<<endl;
         fin.close();
     }
+    
+    cout << wordIndex2.countInTree(wordIndex2.getHead());
+    
     string word_to_be_found;
     do {
         cout << "\nInput word or enter \"exit!\" to exit:" << endl;
         cin >> word_to_be_found;
         if (word_to_be_found != ("exit!")) {
+            int n = wordIndex2.search (word_to_be_found);
+            
             if (wordIndex.search(word_to_be_found) >= 1) {
                 cout << "true" << endl;
             }
-            if (wordIndex2.search (word_to_be_found) >= 1) {
-                cout << "true" << endl;
+            if (n >= 1) {
+                cout << "true " << n << endl;
+            }
+            else {
+                cout << "false" << endl;
             }
             
             //wordIndex.print(word_to_be_found);
