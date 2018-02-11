@@ -26,10 +26,10 @@ int getdir (string dir, vector<string> &files);
 bool makeAlphaNum(string str);
 
 void search (hashTable wordIndex, BST wordIndex2);
-void insert ();
-void deletion ();
-void sorted ();
-void rangedSearch();
+void insert (hashTable wordIndex, BST wordIndex2);
+void deletion (hashTable wordIndex, BST wordIndex2);
+void sorted (hashTable wordIndex, BST wordIndex2);
+void rangedSearch(hashTable wordIndex, BST wordIndex2);
 
 
 int main(int argc, char* argv[]);
