@@ -1,0 +1,28 @@
+
+			Worst Case			Worst Case
+Method	BST		Time Complexity	Hash Table	Time Complexity
+			of BST				of HT
+
+Search
+
+
+Insert
+
+
+Delete
+
+
+Sort
+
+
+Range
+Query 
+(n=10)
+
+Range
+Query
+(n=100)
+
+Range
+Query
+(n=1000)
