@@ -1,12 +1,12 @@
 
 			Worst Case			Worst Case
 Method	BST		Time Complexity	Hash Table	Time Complexity
-			of BST				of HT
+	(microseconds)	of BST				of HT
 
-Search
+Search	
 
 
-Insert
+Insert	93 		O (n)		24		O (n)
 
 
 Delete

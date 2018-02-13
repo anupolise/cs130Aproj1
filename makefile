@@ -1,6 +1,10 @@
 WordSearch: wordsearch.cpp BST.cpp Node.cpp hashTable.cpp nodeHT.cpp
 	g++ BST.cpp Node.cpp hashTable.cpp nodeHT.cpp wordsearch.cpp -c
 	g++ BST.o Node.o hashTable.o nodeHT.o wordsearch.o -o main
+TimeTable: timeTable.cpp BST.cpp Node.cpp hashTable.cpp nodeHT.cpp
+	g++ BST.cpp Node.cpp hashTable.cpp nodeHT.cpp timeTable.cpp -c
+	g++ BST.o Node.o hashTable.o nodeHT.o timeTable.o -o TTmain
+
 BST: BST.cpp Node.cpp
 	g++ BST.cpp Node.cpp BSTTester.cpp -c
 	g++ BST.o Node.o BSTTester.o -o BSTmain
