@@ -3,10 +3,10 @@
 Method	BST		Time Complexity	Hash Table	Time Complexity
 	(microseconds)	of BST				of HT
 
-Search	
+Search	40		O (log n)	
 
 
-Insert	93 		O (n)		24		O (n)
+Insert	93 		O (n)		33		O (n)
 
 
 Delete
