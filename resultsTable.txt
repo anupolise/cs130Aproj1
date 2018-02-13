@@ -1,28 +1,28 @@
 
 			Worst Case			Worst Case
 Method	BST		Time Complexity	Hash Table	Time Complexity
-	(microseconds)	of BST				of HT
+	(microseconds)	of BST		(microseconds)	of HT
 
-Search	40		O (log n)	
+Search	251		O (n)		75		O (n)
 
 
 Insert	93 		O (n)		33		O (n)
 
 
-Delete
+Delete	160		O (n)		71		O (n)
 
 
-Sort
+Sort	37556		O (n)		423841		O (n*log n)
 
 
 Range
-Query 
+Query 	47		O (n)		4547		O (n)
 (n=10)
 
 Range
-Query
+Query	50		O (n)		4858		O (n)
 (n=100)
 
 Range
-Query
+Query	148		O (n)		4228		O (n)
 (n=1000)

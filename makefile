@@ -17,3 +17,4 @@ clean:
 	rm *.o
 	rm BSTmain
 	rm HTmain
+	rm TTmain

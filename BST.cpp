@@ -149,7 +149,9 @@ void BST::rangeSearches (string a, string b, node* pointer, vector <string> &lis
         }
         else {
             //cout << pointer->getData() << endl;
-            list.push_back (pointer->getData());
+            for (int i = 0; i < pointer->getCounter(); i++) {
+                list.push_back (pointer->getData());
+            }
             rangeSearches (a, b, pointer->getRight(), list);
             rangeSearches (a, b, pointer->getLeft(), list);
         }

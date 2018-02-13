@@ -159,16 +159,16 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
 }
 
 
-void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
+void rangedSearch (hashTable &wordIndex, BST &wordIndex2, int size) {
 
     vector <string> s1;
     wordIndex2.sorted(wordIndex2.getHead(), s1); // BST
     int randomInd = rand()%10000;
     string lower, higher;
     lower = s1[randomInd];
-    higher = s1[randomInd+1000];
-    cout << lower << endl;
-    cout << higher << endl;
+    higher = s1[randomInd+size];
+    //cout << lower << endl;
+    //cout << higher << endl;
     struct timeval timer_usec;
     long long int timestamp_usec_before, timestamp_usec_after;
     if (!gettimeofday(&timer_usec, NULL)) {
@@ -185,7 +185,7 @@ void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
     for (int i = 0; i < s3.size(); i++) {
         //cout <<s3[i]<<endl;
     }
-    cout << "BST: " << (timestamp_usec_after - timestamp_usec_before)<< " s" << endl;
+    cout << "BST  " << size << " ranged search = " << timestamp_usec_after - timestamp_usec_before << " microseconds." << endl;
     if (!gettimeofday(&timer_usec, NULL)) {
         timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
         (long long int) timer_usec.tv_usec;
@@ -201,7 +201,7 @@ void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
         //cout <<s4[i]<<endl;
     }
     
-    cout << "Hash: " << (timestamp_usec_after - timestamp_usec_before) << " s" << endl;
+    cout << "HT  " << size << " ranged search = " << timestamp_usec_after - timestamp_usec_before << " microseconds." << endl;
 }
 
 
@@ -308,12 +308,11 @@ int main(int argc, char* argv[])
     cout << "HT  100 inserts = " << msecsHT << " microseconds."<< endl;
     
     search (wordIndex, wordIndex2, randomWordsSearch);
-<<<<<<< HEAD
-    rangedSearch(wordIndex, wordIndex2);
-=======
+    rangedSearch(wordIndex, wordIndex2, 10);
+    rangedSearch(wordIndex, wordIndex2, 100);
+    rangedSearch(wordIndex, wordIndex2, 1000);
     deletion (wordIndex, wordIndex2, randomWordsDelete);
     sorted (wordIndex, wordIndex2);
->>>>>>> 313459f84753be9088aea318781ebdec59611b49
     
     return 0;
 }
