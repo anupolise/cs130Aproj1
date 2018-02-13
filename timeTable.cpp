@@ -85,50 +85,50 @@ void search (hashTable &wordIndex, BST &wordIndex2, vector <string> &v) {
         msecsHT += (timestamp_usec_after - timestamp_usec_before);
         //cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
     }
-    cout << "BST 100 searches = " << msecsBST << " microseconds." << endl;
-    cout << "HT  100 searches = " << msecsHT << " microseconds."<< endl;
+    cout << "BST " << v.size()<<" searches = " << msecsBST << " microseconds." << endl;
+    cout << "HT  " << v.size()<<" searches = " << msecsHT << " microseconds."<< endl;
 }
 
 
-/*
-void deletion (hashTable &wordIndex, BST &wordIndex2, vector &v) {
+
+void deletion (hashTable &wordIndex, BST &wordIndex2, vector <string> &v) {
     int msecsBST = 0;
     int msecsHT = 0;
-    
-    struct timeval timer_usec;
-    long long int timestamp_usec_before, timestamp_usec_after;
-    if (!gettimeofday(&timer_usec, NULL)) {
-        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
-        (long long int) timer_usec.tv_usec;
+    for (int i = 0; i < v.size(); i++) {
+        struct timeval timer_usec;
+        long long int timestamp_usec_before, timestamp_usec_after;
+        if (!gettimeofday(&timer_usec, NULL)) {
+            timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+            (long long int) timer_usec.tv_usec;
+        }
+        
+        wordIndex2.deleteNode(v[i]); // BST
+        if (!gettimeofday(&timer_usec, NULL)) {
+            timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+            (long long int) timer_usec.tv_usec;
+        }
+        msecsBST += (timestamp_usec_after - timestamp_usec_before);
+        
+        //cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+        if (!gettimeofday(&timer_usec, NULL)) {
+            timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
+            (long long int) timer_usec.tv_usec;
+        }
+        
+        wordIndex.deleteValue (v[i]); // HT
+        if (!gettimeofday(&timer_usec, NULL)) {
+            timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
+            (long long int) timer_usec.tv_usec;
+        }
+        msecsHT += (timestamp_usec_after - timestamp_usec_before);
+        //cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
     }
-    
-    wordIndex2.deleteNode(word_to_delete); // BST
-    if (!gettimeofday(&timer_usec, NULL)) {
-        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
-        (long long int) timer_usec.tv_usec;
-    }
-    cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
-    if (!gettimeofday(&timer_usec, NULL)) {
-        timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
-        (long long int) timer_usec.tv_usec;
-    }
-    
-    wordIndex.deleteValue (word_to_delete); // HT
-    if (!gettimeofday(&timer_usec, NULL)) {
-        timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
-        (long long int) timer_usec.tv_usec;
-    }
-    cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    cout << "BST " << v.size()<<" deletes = " << msecsBST << " microseconds." << endl;
+    cout << "HT  " << v.size()<<" deletes = " << msecsHT << " microseconds."<< endl;
 }
-*/
+
 
 void sorted (hashTable &wordIndex, BST &wordIndex2) {
-    string path = "output.txt";
-    cout<<path<<endl;
-    
-    ofstream output;
-    output.open(path);
-    
     
     struct timeval timer_usec;
     long long int timestamp_usec_before, timestamp_usec_after;
@@ -143,7 +143,7 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
         (long long int) timer_usec.tv_usec;
     }
     
-    cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    cout << "BST complete sort hotels-small " << timestamp_usec_after - timestamp_usec_before<< " microseconds." << endl;
     if (!gettimeofday(&timer_usec, NULL)) {
         timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
         (long long int) timer_usec.tv_usec;
@@ -154,20 +154,8 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
         timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
         (long long int) timer_usec.tv_usec;
     }
-    cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    cout << "HT  complete sort hotels-small " << timestamp_usec_after - timestamp_usec_before << " microseconds." << endl;
     
-    
-    for(int i=0; i<s1.size(); i++)
-    {
-        output<<s1[i]<<endl;
-    }
-    
-    output<<endl;
-    
-    for(int i=0; i<s2.size(); i++)
-    {
-        output<<s2[i]<<endl;
-    }
 }
 
 
@@ -249,21 +237,21 @@ int main(int argc, char* argv[])
         string word;
         struct timeval timer_usec;
         long long int timestamp_usec_before, timestamp_usec_after;
-        int searchChance = rand() % 100;
-        int deleteChance = rand() % 100;
-        
 
+        
         
         while(!fin.eof()){
             fin>>word;
+            int searchChance = rand() % 100;
+            int deleteChance = rand() % 100;
             
-            if (searchChance < 2 && countSearch < 100) {
-                countSearch ++;
-                randomWordsSearch.push_back (word);
-            }
             if (deleteChance < 2 && countDelete < 100) {
                 countDelete ++;
                 randomWordsDelete.push_back (word);
+            }
+            if (searchChance < 2 && countSearch < 100) {
+                countSearch ++;
+                randomWordsSearch.push_back (word);
             }
             
             //cout<<"       " << files[i]<<"::"<<word<<endl;
@@ -312,8 +300,10 @@ int main(int argc, char* argv[])
     cout << "HT  100 inserts = " << msecsHT << " microseconds."<< endl;
     
     search (wordIndex, wordIndex2, randomWordsSearch);
+    deletion (wordIndex, wordIndex2, randomWordsDelete);
+    sorted (wordIndex, wordIndex2);
     
-
+    return 0;
 }
 
 
