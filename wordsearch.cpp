@@ -78,6 +78,10 @@ int main(int argc, char* argv[])
             //cout<<"       " << files[i]<<"::"<<word<<endl;
             if(checkAlphaNum(word))
             {
+                for(int i = 0; i<word.length(); i++)
+                {
+                    word[i] = toupper(word[i]);
+                }
                 wordIndex.insert(word);
                 wordIndex2.insert(word);
             }
@@ -227,8 +231,10 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
     string path = "output.txt";
     cout<<path<<endl;
 
+
     ofstream output;
-    output.open(path);
+   // output.open(path);
+    output.open( path, std::ofstream::out | std::ofstream::trunc);
 
     
     struct timeval timer_usec;
