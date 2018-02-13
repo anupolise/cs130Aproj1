@@ -172,11 +172,15 @@ void sorted (hashTable &wordIndex, BST &wordIndex2) {
 
 
 void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
+
+    vector <string> s1;
+    wordIndex2.sorted(wordIndex2.getHead(), s1); // BST
+    int randomInd = rand()%10000;
     string lower, higher;
-    cout << "> ";
-    cin >> lower;
-    cout << "> ";
-    cin >> higher;
+    lower = s1[randomInd];
+    higher = s1[randomInd+1000];
+    cout << lower << endl;
+    cout << higher << endl;
     struct timeval timer_usec;
     long long int timestamp_usec_before, timestamp_usec_after;
     if (!gettimeofday(&timer_usec, NULL)) {
@@ -184,28 +188,32 @@ void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
         (long long int) timer_usec.tv_usec;
     }
     
-    vector <string> s1 = wordIndex2.rangeSearch(lower, higher); // BST
+    vector <string> s3 = wordIndex2.rangeSearch(lower, higher); // BST
     if (!gettimeofday(&timer_usec, NULL)) {
         timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
         (long long int) timer_usec.tv_usec;
     }
     
-    for (int i = 0; i < s1.size(); i++) {
-        cout <<s1[i]<<endl;
+    for (int i = 0; i < s3.size(); i++) {
+        //cout <<s3[i]<<endl;
     }
-    cout << "BST: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    cout << "BST: " << (timestamp_usec_after - timestamp_usec_before)<< " s" << endl;
     if (!gettimeofday(&timer_usec, NULL)) {
         timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
         (long long int) timer_usec.tv_usec;
     }
     
-    vector <string> s2 = wordIndex.rangeSearch (lower, higher); // HT
+    vector <string> s4 = wordIndex.rangeSearch (lower, higher); // HT
     if (!gettimeofday(&timer_usec, NULL)) {
         timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
         (long long int) timer_usec.tv_usec;
     }
+
+    for (int i = 0; i < s4.size(); i++) {
+        //cout <<s4[i]<<endl;
+    }
     
-    cout << "Hash: " << float(timestamp_usec_after - timestamp_usec_before)/1000000.0 << " s" << endl;
+    cout << "Hash: " << (timestamp_usec_after - timestamp_usec_before) << " s" << endl;
 }
 
 
@@ -312,6 +320,7 @@ int main(int argc, char* argv[])
     cout << "HT  100 inserts = " << msecsHT << " microseconds."<< endl;
     
     search (wordIndex, wordIndex2, randomWordsSearch);
+    rangedSearch(wordIndex, wordIndex2);
     
 
 }
