@@ -32,6 +32,9 @@ int getdir (string dir, vector<string> &files)
 
 bool checkAlphaNum(string str)
 {
+    if (str.length() <= 0) {
+        return false;
+    }
     for(int i=0; i< str.length(); i++)
     {
         if(!isalpha(str[i]))
