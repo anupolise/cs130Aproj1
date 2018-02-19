@@ -1,3 +1,5 @@
+Lawrence Lim, Anu Polisetty
+
 # CS130A Project 1 
 ##Lawrence Lim and Anu Polisetty
 

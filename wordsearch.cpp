@@ -131,6 +131,7 @@ int main(int argc, char* argv[])
         {
             rangedSearch(wordIndex, wordIndex2);
         }
+        cout << endl;
     }
     return 0;
 }
