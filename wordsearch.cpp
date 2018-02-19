@@ -15,6 +15,7 @@ int getdir (string dir, vector<string> &files)
 {
     DIR *dp;
     struct dirent *dirp;
+    struct stat s;
     if((dp  = opendir(dir.c_str())) == NULL) {
         //cout << "Error(" << errno << ") opening " << dir << endl;
         return errno;
@@ -22,8 +23,13 @@ int getdir (string dir, vector<string> &files)
     
     while ((dirp = readdir(dp)) != NULL) {
         if (string(dirp->d_name) != "." && string(dirp->d_name) != "..") {
+            string path = dir+"/"+string(dirp->d_name);
             getdir (dir+"/"+string(dirp->d_name), files);
-            files.push_back(string(dir+"/"+dirp->d_name));
+            if ( stat(path.c_str(), &s) == 0 ) {
+                if ( s.st_mode & S_IFREG ) {
+                    files.push_back(string(dir+"/"+dirp->d_name));
+                }
+            }
         }
     }
     closedir(dp);
@@ -134,14 +140,20 @@ void search (hashTable &wordIndex, BST &wordIndex2) {
     string word_to_be_found;
     cout << "> ";
     cin >> word_to_be_found;
+    for(int i = 0; i<word_to_be_found.length(); i++) {
+        word_to_be_found[i] = toupper(word_to_be_found[i]);
+    }
+    
+    
     struct timeval timer_usec;
+    int n = 0;
     long long int timestamp_usec_before, timestamp_usec_after;
     if (!gettimeofday(&timer_usec, NULL)) {
         timestamp_usec_before = ((long long int) timer_usec.tv_sec) * 1000000ll +
         (long long int) timer_usec.tv_usec;
     }
 
-    int n = wordIndex2.search (word_to_be_found); // BST
+    n = wordIndex2.search (word_to_be_found); // BST
     if (!gettimeofday(&timer_usec, NULL)) {
         timestamp_usec_after = ((long long int) timer_usec.tv_sec) * 1000000ll +
         (long long int) timer_usec.tv_usec;
@@ -170,6 +182,9 @@ void insert (hashTable &wordIndex, BST &wordIndex2) {
     string word_to_insert;
     cout << "> ";
     cin >> word_to_insert;
+    for(int i = 0; i<word_to_insert.length(); i++) {
+        word_to_insert[i] = toupper(word_to_insert[i]);
+    }
     
     struct timeval timer_usec;
     long long int timestamp_usec_before, timestamp_usec_after;
@@ -202,6 +217,9 @@ void deletion (hashTable &wordIndex, BST &wordIndex2) {
     string word_to_delete;
     cout << "> ";
     cin >> word_to_delete;
+    for(int i = 0; i<word_to_delete.length(); i++) {
+        word_to_delete[i] = toupper(word_to_delete[i]);
+    }
     
     struct timeval timer_usec;
     long long int timestamp_usec_before, timestamp_usec_after;
@@ -287,6 +305,14 @@ void rangedSearch (hashTable &wordIndex, BST &wordIndex2) {
     cin >> lower;
     cout << "> ";
     cin >> higher;
+    
+    for(int i = 0; i<lower.length(); i++) {
+        lower[i] = toupper(lower[i]);
+    }
+    for(int i = 0; i<higher.length(); i++) {
+        higher[i] = toupper(higher[i]);
+    }
+    
     struct timeval timer_usec;
     long long int timestamp_usec_before, timestamp_usec_after;
     if (!gettimeofday(&timer_usec, NULL)) {
